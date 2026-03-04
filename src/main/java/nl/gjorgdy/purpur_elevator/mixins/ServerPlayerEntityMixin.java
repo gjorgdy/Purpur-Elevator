@@ -22,9 +22,7 @@ public class ServerPlayerEntityMixin implements IElevatorUser {
     }
 
     public boolean purpurElevators$isOnElevatorCooldown() {
-        var cd = purpurElevators$elevatorCooldown.get();
-//        System.out.println("Elevator cooldown: " + cd);
-        return cd > 0;
+        return purpurElevators$elevatorCooldown.get() > 0;
     }
 
     @Inject(method = "tick", at = @At("HEAD"))
