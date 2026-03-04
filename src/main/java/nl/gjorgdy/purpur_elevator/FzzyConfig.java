@@ -5,6 +5,7 @@ import me.fzzyhmstrs.fzzy_config.annotations.IgnoreVisibility;
 import me.fzzyhmstrs.fzzy_config.api.ConfigApi;
 import me.fzzyhmstrs.fzzy_config.api.ConfigApiJava;
 import me.fzzyhmstrs.fzzy_config.config.Config;
+import me.fzzyhmstrs.fzzy_config.validation.number.ValidatedDouble;
 import net.minecraft.resources.Identifier;
 
 @IgnoreVisibility
@@ -18,13 +19,21 @@ public class FzzyConfig extends Config {
     public static void load() {
         var config = ConfigApiJava.registerAndLoadConfig(FzzyConfig::new);
         PurpurElevator.maxElevatorDistance = config.maxElevatorDistance;
+        PurpurElevator.elevatorCooldownTicks = (int) (config.elevatorCooldownSeconds.get() * 20);
+        PurpurElevator.activateWhileSprinting = config.activateWhileSprinting;
     }
 
     private FzzyConfig() {
         super(Identifier.fromNamespaceAndPath(PurpurElevator.MOD_ID, "config"));
     }
 
-    @Comment("The maximum distance between two elevator platforms")
+    @Comment("The maximum distance between two elevator platforms.")
     private int maxElevatorDistance = PurpurElevator.maxElevatorDistance;
 
+    @Comment("The cooldown in seconds after using an elevator platform during which you can't use another one.")
+    private ValidatedDouble elevatorCooldownSeconds = new ValidatedDouble(
+		    (double) PurpurElevator.elevatorCooldownTicks / 20, 5, 0.05, ValidatedDouble.WidgetType.TEXTBOX_WITH_BUTTONS);
+
+    @Comment("Whether an elevator should work while the player is sprinting.")
+    public boolean activateWhileSprinting = PurpurElevator.activateWhileSprinting;
 }

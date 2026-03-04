@@ -1,7 +1,7 @@
 package nl.gjorgdy.purpur_elevator.mixins;
 
 import net.minecraft.server.level.ServerPlayer;
-import nl.gjorgdy.purpur_elevator.Purpur;
+import nl.gjorgdy.purpur_elevator.PurpurElevator;
 import nl.gjorgdy.purpur_elevator.interfaces.ServerPlayerEntityInterface;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
@@ -16,7 +16,7 @@ public class ServerPlayerEntityMixin implements ServerPlayerEntityInterface {
     private int purpurElevators$elevatorCooldown = 0;
 
     public void purpurElevators$setElevatorCooldown() {
-        purpurElevators$elevatorCooldown = 10;
+        purpurElevators$elevatorCooldown = PurpurElevator.elevatorCooldownTicks;
     }
 
     public boolean purpurElevators$isOnElevatorCooldown() {
@@ -26,11 +26,6 @@ public class ServerPlayerEntityMixin implements ServerPlayerEntityInterface {
     @Inject(method = "tick", at = @At("HEAD"))
     public void onTick(CallbackInfo ci) {
         if (purpurElevators$elevatorCooldown > 0) purpurElevators$elevatorCooldown--;
-    }
-
-    @Inject(method = "jumpFromGround", at = @At("RETURN"))
-    public void onJump(CallbackInfo ci) {
-        Purpur.up((ServerPlayer) (Object) this);
     }
 
 }
