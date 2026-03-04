@@ -21,6 +21,8 @@ public class FzzyConfig extends Config {
         PurpurElevator.maxElevatorDistance = config.maxElevatorDistance;
         PurpurElevator.elevatorCooldownTicks = (int) (config.elevatorCooldownSeconds.get() * 20);
         PurpurElevator.activateWhileSprinting = config.activateWhileSprinting;
+        PurpurElevator.allowVehicles = config.allowVehicles;
+        PurpurElevator.allowMounts = config.allowMounts;
     }
 
     private FzzyConfig() {
@@ -36,4 +38,10 @@ public class FzzyConfig extends Config {
 
     @Comment("Whether an elevator should work while the player is sprinting.")
     public boolean activateWhileSprinting = PurpurElevator.activateWhileSprinting;
+
+    @Comment("Whether players riding vehicles should be teleported by the elevator. e.g minecarts and boats")
+    public boolean allowVehicles = true;
+
+    @Comment("Whether players riding mounts should be teleported by the elevator. e.g horses and pigs")
+    public boolean allowMounts = true;
 }

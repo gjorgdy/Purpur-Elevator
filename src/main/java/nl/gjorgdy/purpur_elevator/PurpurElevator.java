@@ -13,8 +13,11 @@ public class PurpurElevator implements ModInitializer {
 	public static final Logger LOGGER = LogManager.getLogger(MOD_NAME);
 
 	public static int maxElevatorDistance = 16;
-	public static int elevatorCooldownTicks = 10;
+	public static int elevatorCooldownTicks = 1;
 	public static boolean activateWhileSprinting = false;
+
+	public static boolean allowVehicles = true;
+	public static boolean allowMounts = true;
 
 	@Override
 	public void onInitialize() {

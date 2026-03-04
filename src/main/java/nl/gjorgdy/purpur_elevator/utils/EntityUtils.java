@@ -3,12 +3,14 @@ package nl.gjorgdy.purpur_elevator.utils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.vehicle.VehicleEntity;
 import net.minecraft.world.entity.vehicle.boat.AbstractBoat;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.portal.TeleportTransition;
 import net.minecraft.world.phys.Vec3;
+import nl.gjorgdy.purpur_elevator.PurpurElevator;
 
 public abstract class EntityUtils {
 
@@ -37,6 +39,12 @@ public abstract class EntityUtils {
 		if (entity.isPassenger()) {
 			var vehicle = entity.getVehicle();
 			assert vehicle != null;
+			if (vehicle instanceof LivingEntity && !PurpurElevator.allowMounts) {
+				return false;
+			}
+			else if (!(vehicle instanceof LivingEntity) && !PurpurElevator.allowVehicles) {
+				return false;
+			}
 			return safeTeleport(vehicle, serverLevel, blockPos);
 		}
 
