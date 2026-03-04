@@ -4,6 +4,7 @@
   "package": "nl.gjorgdy.purpur_elevator.mixins",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
+    "EntityMixin",
     "ServerGamePacketListenerMixin",
     "ServerPlayerEntityMixin"
   ],
