@@ -24,7 +24,6 @@ public class Purpur {
             Blocks.PURPUR_SLAB,
             Blocks.PURPUR_STAIRS
     );
-    static final int range = 16;
 
     public static void up(Entity entity) {
         activate(entity, true);
@@ -41,7 +40,7 @@ public class Purpur {
         }
 
         if (!isPoweredElevatorBlock(entity.level(), entity.blockPosition().below())) return;
-        for (int i = 2; i < range; i++) {
+        for (int i = 2; i < PurpurElevator.maxElevatorDistance; i++) {
             BlockPos _pos = entity.blockPosition().offset(0, up ? (i) : (-1 * i), 0);
             if (isPoweredElevatorBlock(entity.level(), _pos)) {
                 safeTeleport(entity, _pos);
