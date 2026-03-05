@@ -1,17 +1,14 @@
 package nl.gjorgdy.purpur_elevator.mixins;
 
-import net.minecraft.core.BlockBox;
 import net.minecraft.core.BlockPos;
-import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.redstone.Orientation;
 import net.minecraft.world.phys.AABB;
-import net.minecraft.world.phys.shapes.VoxelShape;
-import nl.gjorgdy.purpur_elevator.ElevatorMode;
-import nl.gjorgdy.purpur_elevator.Purpur;
+import nl.gjorgdy.purpur_elevator.core.ElevatorMode;
+import nl.gjorgdy.purpur_elevator.core.ElevatorLogic;
 import nl.gjorgdy.purpur_elevator.PurpurElevator;
 import nl.gjorgdy.purpur_elevator.utils.BlockUtils;
 import org.spongepowered.asm.mixin.Mixin;
@@ -44,7 +41,7 @@ public class BlockBehaviourMixin {
 					blockPos.getCenter().add(0.45, 1.5, 0.45)
 				));
 				switch (PurpurElevator.mode) {
-					case NAIVE -> Purpur.activateNaive(entities);
+					case NAIVE -> ElevatorLogic.activateNaive(entities);
 					case LEVELED -> {}
 				}
 			} else if (strength == 0) {

@@ -1,28 +1,17 @@
-package nl.gjorgdy.purpur_elevator;
+package nl.gjorgdy.purpur_elevator.core;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.player.Player;
+import nl.gjorgdy.purpur_elevator.PurpurElevator;
 import nl.gjorgdy.purpur_elevator.interfaces.IElevatorUser;
 import nl.gjorgdy.purpur_elevator.utils.BlockUtils;
 import nl.gjorgdy.purpur_elevator.utils.EntityUtils;
 
 import java.util.List;
 
-public class Purpur {
+public class ElevatorLogic {
 
-    public static void up(Entity entity) {
-        activatePassive(entity, true);
-        if (entity instanceof Player player) {
-            player.jumpFromGround();
-        }
-    }
-
-    public static void down(Entity entity) {
-        activatePassive(entity, false);
-    }
-
-    private static void activatePassive(Entity entity, boolean up) {
+    public static void activatePassive(Entity entity, boolean up) {
         if (entity instanceof IElevatorUser player && player.purpurElevators$isOnElevatorCooldown()) {
             return;
         }

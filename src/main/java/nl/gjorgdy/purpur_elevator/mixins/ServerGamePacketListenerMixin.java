@@ -3,8 +3,8 @@ package nl.gjorgdy.purpur_elevator.mixins;
 import net.minecraft.network.protocol.game.ServerboundPlayerInputPacket;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.server.network.ServerGamePacketListenerImpl;
-import nl.gjorgdy.purpur_elevator.ElevatorMode;
-import nl.gjorgdy.purpur_elevator.Purpur;
+import nl.gjorgdy.purpur_elevator.core.ElevatorMode;
+import nl.gjorgdy.purpur_elevator.core.ElevatorLogic;
 import nl.gjorgdy.purpur_elevator.PurpurElevator;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -25,10 +25,10 @@ public class ServerGamePacketListenerMixin {
 			&& !PurpurElevator.activateWhileSprinting
 		) return;
 		if (packet.input().jump()) {
-			Purpur.up(player);
+			ElevatorLogic.activatePassive(player, true);
 		}
 		else if (packet.input().shift() && !player.isCrouching()) {
-			Purpur.down(player);
+			ElevatorLogic.activatePassive(player, false);
 		}
 	}
 

@@ -8,6 +8,7 @@ import me.fzzyhmstrs.fzzy_config.config.Config;
 import me.fzzyhmstrs.fzzy_config.validation.misc.ValidatedEnum;
 import me.fzzyhmstrs.fzzy_config.validation.number.ValidatedDouble;
 import net.minecraft.resources.Identifier;
+import nl.gjorgdy.purpur_elevator.core.ElevatorMode;
 
 @IgnoreVisibility
 public class FzzyConfig extends Config {

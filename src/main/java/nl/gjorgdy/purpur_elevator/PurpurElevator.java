@@ -2,6 +2,7 @@ package nl.gjorgdy.purpur_elevator;
 
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.loader.api.FabricLoader;
+import nl.gjorgdy.purpur_elevator.core.ElevatorMode;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
