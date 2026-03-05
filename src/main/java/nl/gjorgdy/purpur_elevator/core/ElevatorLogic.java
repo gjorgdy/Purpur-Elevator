@@ -3,7 +3,7 @@ package nl.gjorgdy.purpur_elevator.core;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.Entity;
 import nl.gjorgdy.purpur_elevator.PurpurElevator;
-import nl.gjorgdy.purpur_elevator.interfaces.IElevatorUser;
+import nl.gjorgdy.purpur_elevator.interfaces.IElevatorEntity;
 import nl.gjorgdy.purpur_elevator.utils.BlockUtils;
 import nl.gjorgdy.purpur_elevator.utils.EntityUtils;
 
@@ -12,7 +12,7 @@ import java.util.List;
 public class ElevatorLogic {
 
     public static void activatePassive(Entity entity, boolean up) {
-        if (entity instanceof IElevatorUser player && player.purpurElevators$isOnElevatorCooldown()) {
+        if (entity instanceof IElevatorEntity player && player.purpurElevators$isOnElevatorCooldown()) {
             return;
         }
 
@@ -23,7 +23,7 @@ public class ElevatorLogic {
             _pos = up ? _pos.above() : _pos.below();
             if (BlockUtils.isPoweredElevatorBlock(entity.level(), _pos)) {
                 if (EntityUtils.safeTeleport(entity, _pos)
-                        && entity instanceof IElevatorUser player) {
+                        && entity instanceof IElevatorEntity player) {
                     player.purpurElevators$setElevatorCooldown();
                 }
                 return;
@@ -46,7 +46,7 @@ public class ElevatorLogic {
                 var final_up = _up;
                 entities.forEach(e -> {
                     if (EntityUtils.safeTeleport(e, final_up)
-                            && entity instanceof IElevatorUser player) {
+                            && entity instanceof IElevatorEntity player) {
                         player.purpurElevators$setElevatorCooldown();
                     }
                 });
@@ -55,7 +55,7 @@ public class ElevatorLogic {
                 var final_down = _down;
                 entities.forEach(e -> {
                     if (EntityUtils.safeTeleport(e, final_down)
-                            && entity instanceof IElevatorUser player) {
+                            && entity instanceof IElevatorEntity player) {
                         player.purpurElevators$setElevatorCooldown();
                     }
                 });
@@ -66,7 +66,7 @@ public class ElevatorLogic {
 
     private static List<Entity> filterCooldown(List<Entity> entities) {
         return entities.stream().filter(
-            entity -> !(entity instanceof IElevatorUser player)
+            entity -> !(entity instanceof IElevatorEntity player)
                     || !player.purpurElevators$isOnElevatorCooldown()
         ).toList();
     }

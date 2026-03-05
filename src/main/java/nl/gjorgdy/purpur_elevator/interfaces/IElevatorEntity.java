@@ -1,6 +1,6 @@
 package nl.gjorgdy.purpur_elevator.interfaces;
 
-public interface IElevatorUser {
+public interface IElevatorEntity {
     void purpurElevators$setElevatorCooldown();
     boolean purpurElevators$isOnElevatorCooldown();
 }
