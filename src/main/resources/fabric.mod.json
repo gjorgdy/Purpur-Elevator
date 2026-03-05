@@ -10,9 +10,6 @@
   "icon": "assets/purpur_elevator/icon.png",
   "environment": "*",
   "entrypoints": {
-    "client": [
-      "nl.gjorgdy.purpur_elevator.client.Purpur_elevatorClient"
-    ],
     "main": [
       "nl.gjorgdy.purpur_elevator.PurpurElevator"
     ]

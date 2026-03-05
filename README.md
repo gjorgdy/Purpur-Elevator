@@ -1,13 +1,34 @@
 <center>
     <h1>TO-DO : Banner image</h1>
-    -
+    What is the point of turning Chorus into Purpur if you can't use its teleporting abilities?
 </center>
 
 <br>
 
 ## About
 
--
+By powering Purpur Blocks using redstone, you can create elevator platforms that teleport you in between them.
+
+_The mod supports a few different modes;_
+
+### Passive (default)
+
+Passive is the simplest mode, all you need to do is permanently power the Purpur Block with redstone, 
+and it will teleport up by jumping, and down by crouching.
+
+### Naïve power ~ will arrive in 1.0
+
+Naïve power activates on being powered by redstone. The moment it gets powered it will teleport all entities on top of it to the nearest platform.
+
+Going up takes priority over going down, so if there are platforms both above and below, it will teleport you up.
+
+### Leveled power ~ will arrive in 1.0
+
+Leveled power is similar to naïve power, but it uses the strength of the redstone signal to determine which platform to teleport to.
+
+Depending on the strength of the redstone signal, it will teleport to the nth platform it can reach from there.
+
+A signal strength of 1 will teleport to the lowest platform, and a signal strength of 15 will teleport to 15th floor.
 
 <br>
 

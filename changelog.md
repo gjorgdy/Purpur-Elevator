@@ -1,7 +1,6 @@
-﻿First release
+﻿Review beta
 ---
 
 - Ported from [Solute](https://modrinth.com/mod/solute), it will be removed from it in a future update.
-- Added grabbing onto chains.
-- Made jumping work using jump key instead of sneaking.
-- Added config options for the reach of ladders, clutching with poles and chain fall damage.
+- Added logic to allow vehicles and mounts to be used on elevators. 
+- Added config options for max distance, cooldown, sprinting, vehicles, and mounts.

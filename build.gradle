@@ -84,6 +84,7 @@ modrinth {
     gameVersions = project.minecraft_versions.split(',') as List<String>
     loaders = ["fabric"]
     dependencies {
+        required.project "fabric-api"
         optional.version "fzzy-config", project.fzzy_config_version
     }
 }
