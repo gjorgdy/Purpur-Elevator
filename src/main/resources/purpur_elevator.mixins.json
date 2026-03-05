@@ -6,8 +6,7 @@
   "mixins": [
     "BlockBehaviourMixin",
     "EntityMixin",
-    "ServerGamePacketListenerMixin",
-    "ServerPlayerEntityMixin"
+    "ServerGamePacketListenerMixin"
   ],
   "client": [
   ],

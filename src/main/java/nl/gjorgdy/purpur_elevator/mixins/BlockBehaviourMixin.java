@@ -41,8 +41,8 @@ public class BlockBehaviourMixin {
 					blockPos.getCenter().add(0.45, 1.5, 0.45)
 				));
 				switch (PurpurElevator.mode) {
-					case NAIVE -> ElevatorLogic.activateNaive(entities);
-					case LEVELED -> {}
+					case NAIVE -> ElevatorLogic.activateNaive(blockPos, entities);
+					case LEVELED -> ElevatorLogic.activateLeveled(blockPos, entities, strength);
 				}
 			} else if (strength == 0) {
 				poweredElevatorBlocks.remove(blockPos);

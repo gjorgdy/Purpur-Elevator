@@ -7,6 +7,7 @@ import nl.gjorgdy.purpur_elevator.interfaces.IElevatorEntity;
 import nl.gjorgdy.purpur_elevator.utils.BlockUtils;
 import nl.gjorgdy.purpur_elevator.utils.EntityUtils;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ElevatorLogic {
@@ -31,14 +32,14 @@ public class ElevatorLogic {
         }
     }
 
-    public static void activateNaive(List<Entity> entities) {
+    public static void activateNaive(BlockPos blockPos, List<Entity> entities) {
         entities = filterCooldown(entities);
 
         if (entities.isEmpty()) return;
         var entity = entities.getFirst();
 
-        var _up = entity.blockPosition().above(2);
-        var _down = entity.blockPosition().below(2);
+        var _up = blockPos.above(2);
+        var _down = blockPos.below(2);
         for (int i = 0; i < PurpurElevator.maxElevatorDistance; i++) {
             _up = _up.above();
             _down = _down.below();
@@ -62,6 +63,43 @@ public class ElevatorLogic {
                 return;
             }
         }
+    }
+
+    public static void activateLeveled(BlockPos blockPos, List<Entity> entities, int floor) {
+        entities = filterCooldown(entities);
+        if (entities.isEmpty()) return;
+        var entity = entities.getFirst();
+
+        List<BlockPos> floors = new ArrayList<>(16);
+        floors.add(blockPos);
+
+        var _down = blockPos.below(2);
+        for (int i = 0; i < PurpurElevator.maxElevatorDistance; i++) {
+            _down = _down.below();
+            if (BlockUtils.isElevatorBlock(entity.level(), _down)) {
+                floors.add(_down);
+                i = 0;
+            }
+        }
+        // reverse the list as floors below are added from the top down
+        floors = floors.reversed();
+        var _up = blockPos.above(2);
+        for (int i = 0; i < PurpurElevator.maxElevatorDistance; i++) {
+            _up = _up.above();
+            if (BlockUtils.isElevatorBlock(entity.level(), _up)) {
+                floors.add(_up);
+                i = 0;
+            }
+        }
+
+        var destination = floors.get(Math.min(floors.size() - 1, floor - 1));
+        if (destination == blockPos) return;
+        entities.forEach(e -> {
+            if (EntityUtils.safeTeleport(e, destination)
+                    && entity instanceof IElevatorEntity player) {
+                player.purpurElevators$setElevatorCooldown();
+            }
+        });
     }
 
     private static List<Entity> filterCooldown(List<Entity> entities) {

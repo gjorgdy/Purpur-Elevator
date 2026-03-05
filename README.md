@@ -22,7 +22,7 @@ Naïve power activates on being powered by redstone. The moment it gets powered 
 
 Going up takes priority over going down, so if there are platforms both above and below, it will teleport you up.
 
-### Leveled power ~ will arrive in 1.0
+### Leveled power
 
 Leveled power is similar to naïve power, but it uses the strength of the redstone signal to determine which platform to teleport to.
 
