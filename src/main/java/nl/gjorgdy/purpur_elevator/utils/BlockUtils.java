@@ -20,9 +20,12 @@ public abstract class BlockUtils {
             Blocks.PURPUR_STAIRS
     );
 
-    public static boolean isPoweredElevatorBlock(Level world, BlockPos pos) {
-        return world.getSignal(pos, Direction.NORTH) > 0 &&
-                elevatorBlocks.contains(world.getBlockState(pos).getBlock());
+    public static boolean isPoweredElevatorBlock(Level level, BlockPos pos) {
+        return level.getSignal(pos, Direction.NORTH) > 0 && isElevatorBlock(level, pos);
+    }
+
+    public static boolean isElevatorBlock(Level level, BlockPos pos) {
+        return elevatorBlocks.contains(level.getBlockState(pos).getBlock());
     }
 
     public static boolean isBottomSlab(BlockState blockState) {

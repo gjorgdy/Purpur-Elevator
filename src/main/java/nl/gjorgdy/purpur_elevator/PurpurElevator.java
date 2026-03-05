@@ -19,6 +19,8 @@ public class PurpurElevator implements ModInitializer {
 	public static boolean allowVehicles = true;
 	public static boolean allowMounts = true;
 
+	public static ElevatorMode mode = ElevatorMode.PASSIVE;
+
 	@Override
 	public void onInitialize() {
 		if (FabricLoader.getInstance().isModLoaded("fzzy_config")) {

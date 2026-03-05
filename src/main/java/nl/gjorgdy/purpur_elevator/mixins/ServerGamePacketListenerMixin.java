@@ -3,6 +3,7 @@ package nl.gjorgdy.purpur_elevator.mixins;
 import net.minecraft.network.protocol.game.ServerboundPlayerInputPacket;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.server.network.ServerGamePacketListenerImpl;
+import nl.gjorgdy.purpur_elevator.ElevatorMode;
 import nl.gjorgdy.purpur_elevator.Purpur;
 import nl.gjorgdy.purpur_elevator.PurpurElevator;
 import org.spongepowered.asm.mixin.Mixin;
@@ -19,7 +20,10 @@ public class ServerGamePacketListenerMixin {
 
 	@Inject(method = "handlePlayerInput", at = @At("HEAD"))
 	public void onJump(ServerboundPlayerInputPacket packet, CallbackInfo ci) {
-		if (packet.input().sprint() && !PurpurElevator.activateWhileSprinting) return;
+		if (PurpurElevator.mode != ElevatorMode.PASSIVE
+			|| packet.input().sprint()
+			&& !PurpurElevator.activateWhileSprinting
+		) return;
 		if (packet.input().jump()) {
 			Purpur.up(player);
 		}

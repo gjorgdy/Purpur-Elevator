@@ -16,7 +16,7 @@ _The mod supports a few different modes;_
 Passive is the simplest mode, all you need to do is permanently power the Purpur Block with redstone, 
 and it will teleport up by jumping, and down by crouching.
 
-### Naïve power ~ will arrive in 1.0
+### Naïve power
 
 Naïve power activates on being powered by redstone. The moment it gets powered it will teleport all entities on top of it to the nearest platform.
 

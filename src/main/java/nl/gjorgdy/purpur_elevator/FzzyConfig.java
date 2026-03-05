@@ -5,6 +5,7 @@ import me.fzzyhmstrs.fzzy_config.annotations.IgnoreVisibility;
 import me.fzzyhmstrs.fzzy_config.api.ConfigApi;
 import me.fzzyhmstrs.fzzy_config.api.ConfigApiJava;
 import me.fzzyhmstrs.fzzy_config.config.Config;
+import me.fzzyhmstrs.fzzy_config.validation.misc.ValidatedEnum;
 import me.fzzyhmstrs.fzzy_config.validation.number.ValidatedDouble;
 import net.minecraft.resources.Identifier;
 
@@ -18,6 +19,7 @@ public class FzzyConfig extends Config {
 
     public static void load() {
         var config = ConfigApiJava.registerAndLoadConfig(FzzyConfig::new);
+        PurpurElevator.mode = config.mode.get();
         PurpurElevator.maxElevatorDistance = config.maxElevatorDistance;
         PurpurElevator.elevatorCooldownTicks = (int) (config.elevatorCooldownSeconds.get() * 20);
         PurpurElevator.activateWhileSprinting = config.activateWhileSprinting;
@@ -28,6 +30,9 @@ public class FzzyConfig extends Config {
     private FzzyConfig() {
         super(Identifier.fromNamespaceAndPath(PurpurElevator.MOD_ID, "config"));
     }
+
+    @Comment("The mode in which the elevator operates. Modes: ('PASSIVE', 'NAIVE', 'LEVELED') SEE THE MODRINTH PAGE FOR MORE INFO.")
+    private ValidatedEnum<ElevatorMode> mode = new ValidatedEnum<>(PurpurElevator.mode, ValidatedEnum.WidgetType.CYCLING);
 
     @Comment("The maximum distance between two elevator platforms.")
     private int maxElevatorDistance = PurpurElevator.maxElevatorDistance;
