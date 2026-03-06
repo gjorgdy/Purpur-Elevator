@@ -1,6 +1,6 @@
+![A villager teleporting using a purpur elevator.](https://cdn.modrinth.com/data/cached_images/77f6ac98e283e224610af3e8fac93e637267a46c_0.webp)
 <center>
-    <h1>TO-DO : Banner image</h1>
-    What is the point of turning Chorus into Purpur if you can't use its teleporting abilities?
+   What is the point of turning Chorus into Purpur if you can't use its teleporting abilities?
 </center>
 
 <br>
@@ -13,7 +13,7 @@ _The mod supports a few different modes;_
 
 ### Passive (default)
 
-Passive is the simplest mode, all you need to do is permanently power the Purpur Block with redstone, 
+Passive is the simplest mode, all you need to do is permanently power the Purpur Block with redstone,
 and it will teleport up by jumping, and down by crouching.
 
 ### Naïve power
@@ -40,6 +40,8 @@ To change settings, you can install [Fzzy Config](https://modrinth.com/mod/fzzy-
 To load changes to the config file, you can use the vanilla ``/reload`` command.
 
 ```toml
+# The mode in which the elevator operates. Modes: ('PASSIVE', 'NAIVE', 'LEVELED').
+mode = "PASSIVE"
 # The maximum distance between two elevator platforms.
 maxElevatorDistance = 16
 # The cooldown in seconds after using an elevator platform during which you can't use another one.
