@@ -56,34 +56,35 @@ public abstract class EntityUtils {
 			serverLevel.getBlockState(blockPos.above(2))
 		};
 
-		if ( !blockStates[1].isSuffocating(serverLevel, blockPos) && !blockStates[1].isSuffocating(serverLevel, blockPos) ) {
-			double dx = playerPos.x() - blockPos.getCenter().x;
-			double dY = BlockUtils.isBottomSlab(blockStates[0]) ? 0.5 : 1;
-			dY = BlockUtils.isBottomSlab(blockStates[1]) ? 1.5 : dY;
-			double dz = playerPos.z() - blockPos.getCenter().z;
-
-			double x = blockPos.getCenter().x + Math.min(0.2, Math.max(-0.2, dx));
-			double y = ((double) blockPos.getY() + dY + 0.15);
-			double z = blockPos.getCenter().z + Math.min(0.2, Math.max(-0.2, dz));
-
-			if (entity instanceof AbstractBoat && blockStates[1].is(Blocks.WATER)) {
-				y += 0.5;
-			}
-
-			TeleportTransition teleportTarget = new TeleportTransition(
-					serverLevel,
-					new Vec3(x, y, z),
-					Vec3.ZERO,
-					entity.getYRot(),
-					entity.getXRot(),
-					ParticleUtils::enderEffect
-			);
-
-			ParticleUtils.enderEffect(entity);
-			entity.teleport(teleportTarget);
-			return true;
+		if (blockStates[1].isSuffocating(serverLevel, blockPos) || blockStates[2].isSuffocating(serverLevel, blockPos)) {
+			return false;
 		}
-		return false;
+
+		double dx = playerPos.x() - blockPos.getCenter().x;
+		double dY = BlockUtils.isBottomSlab(blockStates[0]) ? 0.5 : 1;
+		dY = BlockUtils.isBottomSlab(blockStates[1]) ? 1.5 : dY;
+		double dz = playerPos.z() - blockPos.getCenter().z;
+
+		double x = blockPos.getCenter().x + Math.min(0.2, Math.max(-0.2, dx));
+		double y = ((double) blockPos.getY() + dY + 0.15);
+		double z = blockPos.getCenter().z + Math.min(0.2, Math.max(-0.2, dz));
+
+		if (entity instanceof AbstractBoat && blockStates[1].is(Blocks.WATER)) {
+			y += 0.5;
+		}
+
+		TeleportTransition teleportTarget = new TeleportTransition(
+				serverLevel,
+				new Vec3(x, y, z),
+				Vec3.ZERO,
+				entity.getYRot(),
+				entity.getXRot(),
+				ParticleUtils::enderEffect
+		);
+
+		ParticleUtils.enderEffect(entity);
+		entity.teleport(teleportTarget);
+		return true;
 	}
 
 }
