@@ -28,7 +28,7 @@ Leveled power is similar to naïve power, but it uses the strength of the redsto
 
 Depending on the strength of the redstone signal, it will teleport to the nth platform it can reach from there.
 
-A signal strength of 1 will teleport to the lowest platform, and a signal strength of 15 will teleport to 15th floor.
+A signal strength of 1 will teleport to the lowest platform, and a signal strength of 15 will teleport to the 15th platform.
 
 <br>
 
