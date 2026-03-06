@@ -22,7 +22,7 @@ public class ElevatorLogic {
         BlockPos _pos = up ? entity.blockPosition().above(2) : entity.blockPosition().below(2);
         for (int i = 0; i < PurpurElevator.maxElevatorDistance; i++) {
             _pos = up ? _pos.above() : _pos.below();
-            if (BlockUtils.isPoweredElevatorBlock(entity.level(), _pos)) {
+            if (BlockUtils.isElevatorBlock(entity.level(), _pos)) {
                 if (EntityUtils.safeTeleport(entity, _pos)
                         && entity instanceof IElevatorEntity player) {
                     player.purpurElevators$setElevatorCooldown();
