@@ -5,6 +5,7 @@ import me.fzzyhmstrs.fzzy_config.annotations.IgnoreVisibility;
 import me.fzzyhmstrs.fzzy_config.api.ConfigApi;
 import me.fzzyhmstrs.fzzy_config.api.ConfigApiJava;
 import me.fzzyhmstrs.fzzy_config.config.Config;
+import me.fzzyhmstrs.fzzy_config.event.api.v2.OnUpdateServerListener;
 import me.fzzyhmstrs.fzzy_config.validation.misc.ValidatedEnum;
 import me.fzzyhmstrs.fzzy_config.validation.number.ValidatedDouble;
 import net.minecraft.resources.Identifier;
@@ -14,7 +15,9 @@ import nl.gjorgdy.purpur_elevator.core.ElevatorMode;
 public class FzzyConfig extends Config {
 
     static {
+        ConfigApi.event().onUpdateServer((OnUpdateServerListener) ((a, b, c) -> FzzyConfig.load()));
         ConfigApi.event().onSyncServer((a, b) -> FzzyConfig.load());
+        ConfigApi.event().onUpdateClient((a, b) -> FzzyConfig.load());
         ConfigApi.event().onSyncClient((a, b) -> FzzyConfig.load());
     }
 

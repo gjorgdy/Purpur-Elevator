@@ -29,6 +29,7 @@ public class PurpurElevator implements ModInitializer {
 		} else {
 			LOGGER.log(Level.INFO, "Fzzy Config not found, using default settings.");
 		}
+		LOGGER.info("Purpur Elevator initialized with mode: {}", mode);
 	}
 
 }
