@@ -22,9 +22,9 @@ Naïve power activates on being powered by redstone. The moment it gets powered 
 
 Going up takes priority over going down, so if there are platforms both above and below, it will teleport you up.
 
-### Leveled power
+### Strength power
 
-Leveled power is similar to naïve power, but it uses the strength of the redstone signal to determine which platform to teleport to.
+Strength power is similar to naïve power, but it uses the strength of the redstone signal to determine which platform to teleport to.
 
 Depending on the strength of the redstone signal, it will teleport to the nth platform it can reach from there.
 
@@ -40,7 +40,7 @@ To change settings, you can install [Fzzy Config](https://modrinth.com/mod/fzzy-
 To load changes to the config file, you can use the vanilla ``/reload`` command.
 
 ```toml
-# The mode in which the elevator operates. Modes: ('PASSIVE', 'NAIVE', 'LEVELED').
+# The mode in which the elevator operates. Modes: ('PASSIVE', 'NAIVE', 'STRENGTH').
 mode = "PASSIVE"
 # The maximum distance between two elevator platforms.
 maxElevatorDistance = 16

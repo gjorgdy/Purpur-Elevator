@@ -35,7 +35,7 @@ public class FzzyConfig extends Config {
         super(Identifier.fromNamespaceAndPath(PurpurElevator.MOD_ID, "config"));
     }
 
-    @Comment("The mode in which the elevator operates. Modes: ('PASSIVE', 'NAIVE', 'LEVELED') SEE THE MODRINTH PAGE FOR MORE INFO.")
+    @Comment("The mode in which the elevator operates. Modes: ('PASSIVE', 'NAIVE', 'STRENGTH') SEE THE MODRINTH PAGE FOR MORE INFO.")
     private ValidatedEnum<ElevatorMode> mode = new ValidatedEnum<>(PurpurElevator.mode, ValidatedEnum.WidgetType.CYCLING);
 
     @Comment("The maximum distance between two elevator platforms.")

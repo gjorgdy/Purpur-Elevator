@@ -30,7 +30,7 @@ public class BlockBehaviourMixin {
 		at = @At("TAIL")
 	)
 	public void onNeighborUpdate(BlockState blockState, Level level, BlockPos blockPos, Block block, Orientation orientation, boolean bl, CallbackInfo ci) {
-		if (PurpurElevator.mode != ElevatorMode.NAIVE && PurpurElevator.mode != ElevatorMode.LEVELED) return;
+		if (PurpurElevator.mode != ElevatorMode.NAIVE && PurpurElevator.mode != ElevatorMode.STRENGTH) return;
 		// Naive and Leveled mode use the same redstone activation method, so we can handle both in the same mixin
 		if (BlockUtils.isElevatorBlock(level, blockPos)) {
 			var strength = level.getBestNeighborSignal(blockPos);
@@ -42,7 +42,7 @@ public class BlockBehaviourMixin {
 				));
 				switch (PurpurElevator.mode) {
 					case NAIVE -> ElevatorLogic.activateNaive(blockPos, entities);
-					case LEVELED -> ElevatorLogic.activateLeveled(blockPos, entities, strength);
+					case STRENGTH -> ElevatorLogic.activateLeveled(blockPos, entities, strength);
 				}
 			} else if (strength == 0) {
 				poweredElevatorBlocks.remove(blockPos);
