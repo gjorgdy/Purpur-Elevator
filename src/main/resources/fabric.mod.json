@@ -1,24 +1,27 @@
 {
   "schemaVersion": 1,
-  "id": "purpur_elevator",
+  "id": "${mod_id}",
   "version": "${version}",
-  "name": "Purpur Elevator",
-  "description": "",
-  "authors": [],
+  "name": "${mod_name}",
+  "description": "${description}",
+  "authors": ["${author}"],
   "contact": {},
-  "license": "unlicense",
-  "icon": "assets/purpur_elevator/icon.png",
+  "license": "${license}",
+  "icon": "assets/${mod_path}/icon.png",
   "environment": "*",
   "entrypoints": {
     "main": [
-      "nl.gjorgdy.purpur_elevator.PurpurElevator"
+      "${maven_group}.${mod_path}.${clean_mod_name}"
     ]
   },
   "mixins": [
-    "purpur_elevator.mixins.json"
+    "${mod_path}.mixins.json"
   ],
   "depends": {
     "fabricloader": ">=${loader_version}",
-    "minecraft": "${minecraft_version}"
+    "minecraft": ">=${minecraft_version}"
+  },
+  "suggests": {
+    "fzzy-config": ">=${fzzy_config_version}"
   }
 }
