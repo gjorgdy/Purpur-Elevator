@@ -7,6 +7,7 @@ import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.redstone.Orientation;
 import net.minecraft.world.phys.AABB;
+import net.minecraft.world.phys.Vec3;
 import nl.gjorgdy.purpur_elevator.core.ElevatorMode;
 import nl.gjorgdy.purpur_elevator.core.ElevatorLogic;
 import nl.gjorgdy.purpur_elevator.PurpurElevator;
@@ -37,8 +38,8 @@ public class BlockBehaviourMixin {
 			if (strength > 0 && !poweredElevatorBlocks.contains(blockPos)) {
 				poweredElevatorBlocks.add(blockPos);
 				var entities = level.getEntities(null, new AABB(
-					blockPos.getCenter().add(-0.45, 0, -0.45),
-					blockPos.getCenter().add(0.45, 1.5, 0.45)
+					new Vec3(blockPos).add(0.05, 0.5, 0.05),
+					new Vec3(blockPos).add(0.95, 1.5, 0.95)
 				));
 				switch (PurpurElevator.mode) {
 					case NAIVE -> ElevatorLogic.activateNaive(blockPos, entities);

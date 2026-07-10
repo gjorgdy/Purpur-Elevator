@@ -1,4 +1,4 @@
-﻿We're Going, up, up, Up!
+﻿Still Faster than Geysers
 ---
 
-- Updated to 26.1.2
+- Updated to 26.2

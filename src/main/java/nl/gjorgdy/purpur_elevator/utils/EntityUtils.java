@@ -4,7 +4,6 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.vehicle.VehicleEntity;
 import net.minecraft.world.entity.vehicle.boat.AbstractBoat;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
@@ -60,14 +59,14 @@ public abstract class EntityUtils {
 			return false;
 		}
 
-		double dx = playerPos.x() - blockPos.getCenter().x;
+		double dx = playerPos.x() - blockPos.getX() - 0.5;
 		double dY = BlockUtils.isBottomSlab(blockStates[0]) ? 0.5 : 1;
 		dY = BlockUtils.isBottomSlab(blockStates[1]) ? 1.5 : dY;
-		double dz = playerPos.z() - blockPos.getCenter().z;
+		double dz = playerPos.z() - blockPos.getZ() - 0.5;
 
-		double x = blockPos.getCenter().x + Math.min(0.2, Math.max(-0.2, dx));
+		double x = blockPos.getX() + 0.5 + Math.clamp(dx, -0.2, 0.2);
 		double y = ((double) blockPos.getY() + dY + 0.15);
-		double z = blockPos.getCenter().z + Math.min(0.2, Math.max(-0.2, dz));
+		double z = blockPos.getZ() + 0.5 + Math.clamp(dz, -0.2, 0.2);
 
 		if (entity instanceof AbstractBoat && blockStates[1].is(Blocks.WATER)) {
 			y += 0.5;
