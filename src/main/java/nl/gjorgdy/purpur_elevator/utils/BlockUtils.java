@@ -28,6 +28,10 @@ public abstract class BlockUtils {
         return elevatorBlocks.contains(level.getBlockState(pos).getBlock());
     }
 
+    public static boolean isExtensionBlock(Level level, BlockPos pos) {
+        return level.getBlockState(pos).is(Blocks.END_ROD);
+    }
+
     public static boolean isBottomSlab(BlockState blockState) {
         return blockState.getBlock() instanceof SlabBlock
                 && blockState.getValue(SlabBlock.TYPE) == SlabType.BOTTOM;

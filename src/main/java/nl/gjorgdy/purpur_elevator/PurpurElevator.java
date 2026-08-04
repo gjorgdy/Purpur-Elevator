@@ -1,11 +1,14 @@
 package nl.gjorgdy.purpur_elevator;
 
 import net.fabricmc.api.ModInitializer;
+import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
 import net.fabricmc.loader.api.FabricLoader;
 import nl.gjorgdy.purpur_elevator.core.ElevatorMode;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
+import java.util.concurrent.ConcurrentLinkedQueue;
 
 public class PurpurElevator implements ModInitializer {
 
@@ -19,11 +22,26 @@ public class PurpurElevator implements ModInitializer {
 
 	public static boolean allowVehicles = true;
 	public static boolean allowMounts = true;
+	public static boolean enableExtensions = true;
 
 	public static ElevatorMode mode = ElevatorMode.PASSIVE;
 
+	private static final ConcurrentLinkedQueue<Runnable> deferredTasks = new ConcurrentLinkedQueue<>();
+
+	public static void scheduleNextTick(Runnable task) {
+		deferredTasks.add(task);
+	}
+
 	@Override
 	public void onInitialize() {
+		ServerTickEvents.START_SERVER_TICK.register(_ -> {
+			while (!deferredTasks.isEmpty()) {
+				var task = deferredTasks.poll();
+				if (task != null) {
+					task.run();
+				}
+			}
+		});
 		if (FabricLoader.getInstance().isModLoaded("fzzy_config")) {
 			FzzyConfig.load();
 		} else {

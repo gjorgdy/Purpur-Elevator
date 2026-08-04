@@ -32,6 +32,14 @@ A signal strength of 1 will teleport to the lowest platform, and a signal streng
 
 <br>
 
+## Extensions
+
+End rods can be placed in-between platforms to extend the range of the elevators.
+
+> This can be disabled in the config
+
+<br>
+
 ## Configuration
 
 On its own, the mod will not create a config file.
@@ -52,4 +60,6 @@ activateWhileSprinting = false
 allowVehicles = true
 # Whether players riding mounts should be teleported by the elevator. e.g horses and pigs
 allowMounts = true
+# Whether the range of elevators should be able to be extended using End Rods
+enableExtensions = true
 ```

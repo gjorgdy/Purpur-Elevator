@@ -19,9 +19,16 @@ public class ElevatorLogic {
 
         if (!isStandingOnElevator(entity)) return;
 
-        BlockPos _pos = up ? entity.blockPosition().above(2) : entity.blockPosition().below(2);
-        for (int i = 0; i < PurpurElevator.maxElevatorDistance; i++) {
+        BlockPos _pos = up ? entity.blockPosition().above(2) : entity.blockPosition().below(4);
+        for (int i = 0; i <= PurpurElevator.maxElevatorDistance; i++) {
             _pos = up ? _pos.above() : _pos.below();
+
+            if (PurpurElevator.enableExtensions && BlockUtils.isExtensionBlock(entity.level(), _pos)) {
+                i = 0;
+                _pos = up ? _pos.above() : _pos.below();
+                continue;
+            }
+
             if (BlockUtils.isElevatorBlock(entity.level(), _pos)) {
                 if (EntityUtils.safeTeleport(entity, _pos)
                         && entity instanceof IElevatorEntity player) {
@@ -39,28 +46,52 @@ public class ElevatorLogic {
         var entity = entities.getFirst();
 
         var _up = blockPos.above(2);
-        var _down = blockPos.below(2);
-        for (int i = 0; i < PurpurElevator.maxElevatorDistance; i++) {
-            _up = _up.above();
-            _down = _down.below();
-            if (BlockUtils.isElevatorBlock(entity.level(), _up)) {
-                var final_up = _up;
-                entities.forEach(e -> {
-                    if (EntityUtils.safeTeleport(e, final_up)
-                            && entity instanceof IElevatorEntity player) {
-                        player.purpurElevators$setElevatorCooldown();
-                    }
-                });
-                return;
-            } else if (BlockUtils.isElevatorBlock(entity.level(), _down)) {
-                var final_down = _down;
-                entities.forEach(e -> {
-                    if (EntityUtils.safeTeleport(e, final_down)
-                            && entity instanceof IElevatorEntity player) {
-                        player.purpurElevators$setElevatorCooldown();
-                    }
-                });
-                return;
+        var _down = blockPos.below(4);
+
+        var distanceUp = 0;
+        var distanceDown = 0;
+
+        while (true) {
+            if (distanceUp <= PurpurElevator.maxElevatorDistance) {
+                _up = _up.above();
+                distanceUp++;
+                if (BlockUtils.isExtensionBlock(entity.level(), _up)) {
+                    distanceUp = 0;
+                    _up = _up.above();
+                    continue;
+                }
+                if (BlockUtils.isElevatorBlock(entity.level(), _up)) {
+                    var final_up = _up;
+                    entities.forEach(e -> {
+                        if (EntityUtils.safeTeleport(e, final_up)
+                                && entity instanceof IElevatorEntity player) {
+                            player.purpurElevators$setElevatorCooldown();
+                        }
+                    });
+                    return;
+                }
+            }
+            if (distanceDown <= PurpurElevator.maxElevatorDistance) {
+                _down = _down.below();
+                distanceDown++;
+                if (BlockUtils.isExtensionBlock(entity.level(), _down)) {
+                    distanceDown = 0;
+                    _down = _down.below();
+                    continue;
+                }
+                if (BlockUtils.isElevatorBlock(entity.level(), _down)) {
+                    var final_down = _down;
+                    entities.forEach(e -> {
+                        if (EntityUtils.safeTeleport(e, final_down)
+                                && entity instanceof IElevatorEntity player) {
+                            player.purpurElevators$setElevatorCooldown();
+                        }
+                    });
+                    return;
+                }
+            }
+            if (distanceDown > PurpurElevator.maxElevatorDistance || distanceUp > PurpurElevator.maxElevatorDistance) {
+                break;
             }
         }
     }
@@ -73,19 +104,29 @@ public class ElevatorLogic {
         List<BlockPos> floors = new ArrayList<>(16);
         floors.add(blockPos);
 
-        var _down = blockPos.below(2);
-        for (int i = 0; i < PurpurElevator.maxElevatorDistance; i++) {
+        var _down = blockPos.below(4);
+        for (int i = 0; i <= PurpurElevator.maxElevatorDistance; i++) {
             _down = _down.below();
+            if (PurpurElevator.enableExtensions && BlockUtils.isExtensionBlock(entity.level(), _down)) {
+                i = 0;
+                _down = _down.below();
+                continue;
+            }
             if (BlockUtils.isElevatorBlock(entity.level(), _down)) {
                 floors.add(_down);
                 i = 0;
             }
         }
-        // reverse the list as floors below are added from the top down
+        // Reverse the list as floors below are added from the top down
         floors = floors.reversed();
         var _up = blockPos.above(2);
-        for (int i = 0; i < PurpurElevator.maxElevatorDistance; i++) {
+        for (int i = 0; i <= PurpurElevator.maxElevatorDistance; i++) {
             _up = _up.above();
+            if (PurpurElevator.enableExtensions && BlockUtils.isExtensionBlock(entity.level(), _up)) {
+                i = 0;
+                _up = _up.above();
+                continue;
+            }
             if (BlockUtils.isElevatorBlock(entity.level(), _up)) {
                 floors.add(_up);
                 i = 0;

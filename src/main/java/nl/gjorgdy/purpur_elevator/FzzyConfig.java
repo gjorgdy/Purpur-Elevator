@@ -16,9 +16,9 @@ public class FzzyConfig extends Config {
 
     static {
         ConfigApi.event().onUpdateServer((OnUpdateServerListener) ((a, b, c) -> FzzyConfig.load()));
-        ConfigApi.event().onSyncServer((a, b) -> FzzyConfig.load());
-        ConfigApi.event().onUpdateClient((a, b) -> FzzyConfig.load());
-        ConfigApi.event().onSyncClient((a, b) -> FzzyConfig.load());
+        ConfigApi.event().onSyncServer((_, _) -> FzzyConfig.load());
+        ConfigApi.event().onUpdateClient((_, _) -> FzzyConfig.load());
+        ConfigApi.event().onSyncClient((_, _) -> FzzyConfig.load());
     }
 
     public static void load() {
@@ -53,4 +53,7 @@ public class FzzyConfig extends Config {
 
     @Comment("Whether players riding mounts should be teleported by the elevator. e.g horses and pigs")
     public boolean allowMounts = true;
+
+    @Comment("Whether the range of elevators should be able to be extended using End Rods")
+    public boolean enableExtensions = PurpurElevator.enableExtensions;
 }

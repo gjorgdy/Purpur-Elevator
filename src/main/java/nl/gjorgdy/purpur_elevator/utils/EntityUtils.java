@@ -78,7 +78,7 @@ public abstract class EntityUtils {
 				Vec3.ZERO,
 				entity.getYRot(),
 				entity.getXRot(),
-				ParticleUtils::enderEffect
+				_ -> PurpurElevator.scheduleNextTick(() -> ParticleUtils.enderEffect(entity))
 		);
 
 		ParticleUtils.enderEffect(entity);

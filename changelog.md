@@ -1,4 +1,5 @@
-﻿Still Faster than Geysers
+﻿Long Gone
 ---
 
-- Updated to 26.2
+- Added 'extensions'; placing end rods in between elevators extends their range.
+  - This can be disabled in the config if deemed too strong. 
