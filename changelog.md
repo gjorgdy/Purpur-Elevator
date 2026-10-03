@@ -1,5 +1,4 @@
-﻿Long Gone
+﻿Teleport Through the Wilderness
 ---
 
-- Added 'extensions'; placing end rods in between elevators extends their range.
-  - This can be disabled in the config if deemed too strong. 
+- Updated to 26.3
